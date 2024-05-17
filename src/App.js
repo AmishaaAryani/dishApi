@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import{BrowserRouter,Route,Routes} from "react-router-dom";
+import Food from './component/Food'
+import FoodDetail from './component/FoodDetail';
+import Cart from './component/Cart';
+import Search from './component/Search'
 
-function App() {
+import "./App.css";
+import './index.css';
+
+const App = () => {
+  const [cart,setCart] =useState([]) 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  <>
+  <BrowserRouter>
+    <Routes>
+      <Route path='/' element ={ <Food  cart={cart} setCart={setCart}/>} exact />
+      <Route path='/search/:term' element={ <Search/>}/>
+      <Route path='/meals/:idMeal' element={<FoodDetail />} />
+          <Route path='/cart' element={<Cart  cart={cart} setCart={setCart}/>} />
+    </Routes>
+  </BrowserRouter>
 
-export default App;
+ 
+      </>
+   
+  )
+      
+
+
+  
+    
+    
+  
+};
+
+export default App
